@@ -1,10 +1,11 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { X, Trash2, ShoppingBag, ArrowRight } from "lucide-react";
-import Link from "next/link";
 import { useStore } from "@/lib/store";
 import { formatPrice } from "@/lib/utils";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowRight, ShoppingBag, Trash2, X } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function CartDrawer() {
   const { isCartOpen, closeCart, cart, removeFromCart, getCartTotal, getCartCount } = useStore();
@@ -72,10 +73,12 @@ export default function CartDrawer() {
                     >
                       <div className="w-16 sm:w-20 aspect-[3/4] surface-secondary overflow-hidden rounded-sm flex-shrink-0">
                         {item.artwork.image ? (
-                          <img
+                          <Image
                             src={item.artwork.image}
                             alt={item.artwork.title}
-                            className="w-full h-full object-cover"
+                            fill
+                            sizes="120px"
+                            className="object-cover"
                           />
                         ) : (
                           <div

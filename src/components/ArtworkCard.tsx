@@ -1,12 +1,12 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { Heart } from "lucide-react";
+import { useStore } from "@/lib/store";
 import { Artwork } from "@/lib/types";
 import { formatPrice } from "@/lib/utils";
-import { useStore } from "@/lib/store";
+import { motion } from "framer-motion";
+import { Heart } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 interface ArtworkCardProps {
   artwork: Artwork;
@@ -31,11 +31,13 @@ export default function ArtworkCard({ artwork, index = 0 }: ArtworkCardProps) {
         <div className="artwork-card surface-secondary aspect-[3/4] relative rounded-sm overflow-hidden">
           {/* Image or Placeholder */}
           {artwork.image ? (
-            <img
+            <Image
               src={artwork.image}
               alt={artwork.title}
-              className="absolute inset-0 w-full h-full object-cover"
-              loading="lazy"
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className="absolute inset-0 object-cover"
+              priority={index < 2}
             />
           ) : (
             <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-sand/60 to-taupe/40">

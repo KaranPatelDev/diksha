@@ -1,25 +1,26 @@
 "use client";
 
-import { use } from "react";
-import { motion } from "framer-motion";
-import {
-  ArrowLeft,
-  Heart,
-  ShoppingBag,
-  Share2,
-  ZoomIn,
-  Truck,
-  Shield,
-  RotateCcw,
-} from "lucide-react";
-import Link from "next/link";
-import { getArtworks, getArtworkBySlug } from "@/lib/data";
-import { formatPrice } from "@/lib/utils";
-import { useStore } from "@/lib/store";
 import ArtworkCard from "@/components/ArtworkCard";
 import SectionHeading from "@/components/SectionHeading";
-import { useState, useEffect } from "react";
+import { getArtworkBySlug, getArtworks } from "@/lib/data";
+import { useStore } from "@/lib/store";
 import { Artwork } from "@/lib/types";
+import { formatPrice } from "@/lib/utils";
+import { motion } from "framer-motion";
+import {
+    ArrowLeft,
+    Heart,
+    MessageCircle,
+    RotateCcw,
+    Share2,
+    Shield,
+    ShoppingBag,
+    Truck,
+    ZoomIn,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { use, useEffect, useState } from "react";
 
 export default function ArtworkDetailPage({
   params,
@@ -91,10 +92,13 @@ export default function ArtworkDetailPage({
               onClick={() => setZoomed(!zoomed)}
             >
               {artwork.image ? (
-                <img
+                <Image
                   src={artwork.image}
                   alt={artwork.title}
+                  fill={!zoomed}
+                  sizes={zoomed ? "100vw" : "(max-width: 1024px) 100vw, 50vw"}
                   className={zoomed ? "max-w-full max-h-full object-contain" : "absolute inset-0 w-full h-full object-cover"}
+                  priority
                 />
               ) : (
                 <div className={`flex items-center justify-center bg-gradient-to-br from-sand/60 to-taupe/30 ${zoomed ? "w-full h-full" : "absolute inset-0"}`}>
@@ -164,11 +168,23 @@ export default function ArtworkDetailPage({
             {/* Actions */}
             <div className="flex flex-col sm:flex-row gap-3 mb-6 sm:mb-8">
               {artwork.available && (
-                <button onClick={() => !inCart && addToCart(artwork)} disabled={inCart} className={`flex-1 ${inCart ? "btn-gold" : "btn-primary"}`}>
+                <button onClick={() => !inCart && addToCart(artwork)} disabled={inCart} className={`flex-1 ${inCart ? "btn-gold" : "btn-sweet-primary"}`}>
                   <span className="flex items-center justify-center gap-2">
                     <ShoppingBag size={16} />{inCart ? "In Cart" : "Add to Cart"}
                   </span>
                 </button>
+              )}
+              {artwork.available && (
+                <a
+                  href={`https://wa.me/919016278391?text=Hi! I'm interested in buying "${artwork.title}" - ${formatPrice(artwork.price)}. Is it available?`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-sweet-outline flex-1 text-center"
+                >
+                  <span className="flex items-center justify-center gap-2">
+                    <MessageCircle size={16} />Order on WhatsApp
+                  </span>
+                </a>
               )}
               <button onClick={() => inWishlist ? removeFromWishlist(artwork.id) : addToWishlist(artwork)} className="btn-outline">
                 <Heart size={16} fill={inWishlist ? "currentColor" : "none"} />

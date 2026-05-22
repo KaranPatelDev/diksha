@@ -6,10 +6,10 @@ import { Artwork, Testimonial, SiteSettings } from "./types";
 
 const defaultSettings: SiteSettings = {
   artistName: "Diksha",
-  artistFullName: "Diksha Kapoor",
+  artistFullName: "Diksha Patel",
   artistTitle: "Contemporary Visual Artist",
   tagline: "Original art that transforms spaces",
-  bio: `Diksha Kapoor is a contemporary visual artist based in Pune, India, whose work explores the intersection of emotion, landscape, and the human experience. With a Master's degree in Fine Arts from Sir J.J. School of Art, Mumbai, she has spent over a decade developing a distinctive artistic voice that bridges traditional Indian aesthetics with contemporary expression.
+  bio: `Diksha Patel is a contemporary visual artist based in Pune, India, whose work explores the intersection of emotion, landscape, and the human experience. With a Master's degree in Fine Arts from Sir J.J. School of Art, Mumbai, she has spent over a decade developing a distinctive artistic voice that bridges traditional Indian aesthetics with contemporary expression.
 
 Her paintings are held in private collections across India, Singapore, Dubai, and the United Kingdom. Each piece is created with an unwavering commitment to craftsmanship, using only the finest artist-grade materials to ensure lasting beauty for generations.`,
   philosophy: `"I believe that art should move you — not just aesthetically, but emotionally. Every painting I create begins with a feeling, a memory, or a question. The canvas becomes a space for dialogue between the artist and the viewer, where words are unnecessary and the language is color, form, and light.
@@ -25,8 +25,8 @@ My process is deeply intuitive. I rarely plan a painting's final form before I b
     "International Group Exhibition — Singapore Art Week (2023)",
   ],
   email: "hello@dikshaart.com",
-  phone: "+91 98765 43210",
-  whatsapp: "https://wa.me/919876543210",
+  phone: "+91 90162 78391",
+  whatsapp: "https://wa.me/919016278391",
   instagram: "https://instagram.com/dikshaart",
   studioAddress: "Studio 14, Art District, Koregaon Park, Pune 411001, Maharashtra, India",
   studioHours: "By appointment only — Mon–Sat, 10:00 AM – 6:00 PM",
@@ -60,7 +60,7 @@ const defaultTestimonials: Testimonial[] = [
 export const siteConfig = {
   name: "Diksha Art Studio",
   description:
-    "Original contemporary paintings by Diksha Kapoor. Discover unique artwork that transforms your space.",
+    "Original contemporary paintings by Diksha Patel. Discover unique artwork that transforms your space.",
   url: "https://dikshaart.com",
   ogImage: "/og-image.jpg",
   keywords: [
@@ -71,7 +71,7 @@ export const siteConfig = {
     "abstract art",
     "landscape paintings",
     "art gallery",
-    "Diksha Kapoor",
+    "Diksha Patel",
     "fine art",
     "oil paintings",
   ],

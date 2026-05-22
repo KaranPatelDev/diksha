@@ -5,7 +5,7 @@ import { persist } from "zustand/middleware";
 import { Artwork, CartItem, WishlistItem } from "./types";
 
 const ADMIN_USERNAME = "diksha";
-const ADMIN_PASSWORD = "art2024";
+const ADMIN_PASSWORD = "di_pa_ks_te_ha_l@123";
 
 interface StoreState {
   // Cart

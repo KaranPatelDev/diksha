@@ -4,8 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Heart, ShoppingBag, Menu, X } from "lucide-react";
+import { Heart, ShoppingBag, Menu, X, Sun, Moon, Lock } from "lucide-react";
 import { useStore } from "@/lib/store";
+import { useTheme } from "@/lib/theme";
+import { useRouter } from "next/navigation";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -16,8 +18,14 @@ const navLinks = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
   const { openCart, wishlist } = useStore();
+  const { theme, toggleTheme } = useTheme();
+  const [showAdminLogin, setShowAdminLogin] = useState(false);
+  const [adminUser, setAdminUser] = useState("");
+  const [adminPass, setAdminPass] = useState("");
+  const [adminError, setAdminError] = useState("");
 
   useEffect(() => {
     setMobileOpen(false);
@@ -25,6 +33,17 @@ export default function Navbar() {
 
   const isAdminPage = pathname.startsWith("/admin");
   if (isAdminPage) return null;
+
+  const handleAdminLogin = () => {
+    setAdminError("");
+    if (adminUser === "diksha" && adminPass === "di_pa_ks_te_ha_l@123") {
+      localStorage.setItem("diksha_admin", "true");
+      setShowAdminLogin(false);
+      router.push("/admin");
+    } else {
+      setAdminError("Invalid credentials");
+    }
+  };
 
   return (
     <>
@@ -34,12 +53,12 @@ export default function Navbar() {
             {/* Logo */}
             <Link href="/" className="flex flex-col">
               <span
-                className="text-lg sm:text-xl tracking-[0.15em] uppercase font-medium text-rose-dark"
+                className="text-lg sm:text-xl tracking-[0.15em] uppercase font-medium"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 Diksha
               </span>
-              <span className="text-[0.55rem] sm:text-[0.6rem] tracking-[0.25em] uppercase -mt-1 text-rose/60">
+              <span className="text-[0.55rem] sm:text-[0.6rem] tracking-[0.25em] uppercase -mt-1 opacity-60">
                 Art Studio
               </span>
             </Link>
@@ -52,8 +71,8 @@ export default function Navbar() {
                   href={link.href}
                   className={`text-[0.7rem] lg:text-xs tracking-[0.15em] uppercase transition-colors relative py-1 ${
                     pathname === link.href
-                      ? "text-rose-dark font-medium"
-                      : "text-charcoal/70 hover:text-rose"
+                      ? "opacity-100 font-medium"
+                      : "opacity-60 hover:opacity-100"
                   }`}
                 >
                   {link.label}
@@ -69,10 +88,19 @@ export default function Navbar() {
 
             {/* Right Actions */}
             <div className="flex items-center gap-2 sm:gap-3">
+              {/* Theme Toggle */}
+              <button
+                onClick={toggleTheme}
+                className="p-2 transition-colors opacity-60 hover:opacity-100"
+                aria-label="Toggle theme"
+              >
+                {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+              </button>
+
               {/* Wishlist */}
               <Link
                 href="/gallery"
-                className="p-2 relative transition-colors text-charcoal/70 hover:text-rose"
+                className="p-2 relative transition-colors opacity-60 hover:opacity-100"
               >
                 <Heart size={18} />
                 {wishlist.length > 0 && (
@@ -85,15 +113,24 @@ export default function Navbar() {
               {/* Cart */}
               <button
                 onClick={openCart}
-                className="p-2 relative transition-colors text-charcoal/70 hover:text-rose"
+                className="p-2 relative transition-colors opacity-60 hover:opacity-100"
               >
                 <ShoppingBag size={18} />
+              </button>
+
+              {/* Admin Login */}
+              <button
+                onClick={() => setShowAdminLogin(true)}
+                className="p-2 transition-colors opacity-40 hover:opacity-100"
+                aria-label="Admin Login"
+              >
+                <Lock size={16} />
               </button>
 
               {/* Mobile Menu */}
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="md:hidden p-2 text-charcoal/70 hover:text-rose"
+                className="md:hidden p-2 transition-colors opacity-60 hover:opacity-100"
               >
                 {mobileOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
@@ -129,21 +166,78 @@ export default function Navbar() {
                   onClick={() => setMobileOpen(false)}
                   className={`py-4 text-sm tracking-[0.1em] uppercase border-b border-subtle transition-colors ${
                     pathname === link.href
-                      ? "text-rose-dark font-medium"
-                      : "text-charcoal/70 hover:text-rose"
+                      ? "opacity-100 font-medium"
+                      : "opacity-60 hover:opacity-100"
                   }`}
                 >
                   {link.label}
                 </Link>
               ))}
-              <Link
-                href="/admin"
-                onClick={() => setMobileOpen(false)}
-                className="py-4 text-xs tracking-[0.1em] uppercase text-charcoal/50 hover:text-rose transition-colors mt-4"
-              >
-                Admin Panel
-              </Link>
             </motion.nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Admin Login Modal */}
+      <AnimatePresence>
+        {showAdminLogin && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+          >
+            <div
+              className="absolute inset-0 bg-black/50"
+              onClick={() => setShowAdminLogin(false)}
+            />
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative w-full max-w-sm surface-primary rounded-lg shadow-elevated p-6"
+            >
+              <button
+                onClick={() => setShowAdminLogin(false)}
+                className="absolute top-3 right-3 p-1 opacity-50 hover:opacity-100"
+              >
+                <X size={18} />
+              </button>
+              <div className="text-center mb-6">
+                <div className="w-12 h-12 mx-auto mb-3 bg-rose/10 rounded-full flex items-center justify-center">
+                  <Lock size={20} className="text-rose" />
+                </div>
+                <h3 className="text-lg text-primary" style={{ fontFamily: "var(--font-display)" }}>
+                  Admin Login
+                </h3>
+              </div>
+              <div className="space-y-4">
+                <input
+                  type="text"
+                  placeholder="Username"
+                  value={adminUser}
+                  onChange={(e) => setAdminUser(e.target.value)}
+                  className="input-field text-sm"
+                />
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={adminPass}
+                  onChange={(e) => setAdminPass(e.target.value)}
+                  className="input-field text-sm"
+                  onKeyDown={(e) => e.key === "Enter" && handleAdminLogin()}
+                />
+                {adminError && (
+                  <p className="text-error text-xs text-center">{adminError}</p>
+                )}
+                <button
+                  onClick={handleAdminLogin}
+                  className="btn-sweet-primary w-full text-xs"
+                >
+                  Login
+                </button>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

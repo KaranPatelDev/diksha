@@ -137,7 +137,11 @@ html.dark ::-webkit-scrollbar-thumb { background: var(--color-d-border); }
 }
 
 .gradient-sweet-girl {
-  background: linear-gradient(180deg, #FFF5F7 0%, #FCE4EC 50%, #FDF2F5 100%);
+  background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-ivory) 100%);
+}
+
+html.dark .gradient-sweet-girl {
+  background: linear-gradient(180deg, #2A2028 0%, #1A1714 100%);
 }
 
 .gradient-dark {
@@ -148,10 +152,12 @@ html.dark ::-webkit-scrollbar-thumb { background: var(--color-d-border); }
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   background-color: rgba(250, 248, 245, 0.82);
+  border-color: var(--color-sand);
 }
 
 html.dark .glass-effect {
   background-color: rgba(15, 13, 11, 0.85);
+  border-color: var(--color-d-border);
 }
 
 /* ==========================================
@@ -491,6 +497,11 @@ textarea.input-field {
   border-color: var(--color-rose);
 }
 
+html.dark .btn-sweet-outline {
+  color: var(--color-ivory);
+  border-color: var(--color-rose);
+}
+
 .badge-sweet {
   display: inline-flex;
   align-items: center;
@@ -508,24 +519,6 @@ textarea.input-field {
 .surface-primary {
   background-color: var(--color-ivory);
 }
-html.dark .surface-primary {
-  background-color: var(--color-d-bg);
-}
-
-.surface-secondary {
-  background-color: var(--color-cream);
-}
-html.dark .surface-secondary {
-  background-color: var(--color-d-surface);
-}
-
-.surface-card {
-  background-color: rgba(245, 240, 235, 0.5);
-}
-html.dark .surface-card {
-  background-color: var(--color-d-surface2);
-}
-
 .text-primary {
   color: var(--color-midnight);
 }
@@ -538,6 +531,13 @@ html.dark .text-primary {
 }
 html.dark .text-secondary {
   color: var(--color-d-text-muted);
+}
+
+.hero-heading-text {
+  color: var(--color-midnight);
+}
+html.dark .hero-heading-text {
+  color: var(--color-midnight);
 }
 
 .text-muted {

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -21,6 +21,12 @@ const inter = Inter({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#EC8AA0",
+};
+
 export const metadata: Metadata = {
   title: {
     default: `${siteConfig.name} — Original Contemporary Art`,
@@ -28,8 +34,8 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   keywords: siteConfig.keywords,
-  authors: [{ name: "Diksha Kapoor" }],
-  creator: "Diksha Kapoor",
+  authors: [{ name: "Diksha Patel" }],
+  creator: "Diksha Patel",
   openGraph: {
     type: "website",
     locale: "en_IN",
@@ -64,7 +70,7 @@ export const metadata: Metadata = {
     },
   },
 };
-
+  
 export default function RootLayout({
   children,
 }: Readonly<{

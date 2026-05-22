@@ -1,14 +1,14 @@
 "use client";
 
-import Link from "next/link";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, ArrowDown, Sparkles } from "lucide-react";
-import { getArtworks, getTestimonials, getSettings } from "@/lib/data";
 import ArtworkCard from "@/components/ArtworkCard";
-import TestimonialCard from "@/components/TestimonialCard";
 import SectionHeading from "@/components/SectionHeading";
-import { useRef, useState, useEffect } from "react";
-import { Artwork, Testimonial, SiteSettings } from "@/lib/types";
+import TestimonialCard from "@/components/TestimonialCard";
+import { getArtworks, getSettings, getTestimonials } from "@/lib/data";
+import { Artwork, SiteSettings, Testimonial } from "@/lib/types";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowDown, ArrowRight, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -42,14 +42,14 @@ export default function Home() {
       <section ref={heroRef} className="relative h-screen overflow-hidden">
         <motion.div
           style={{ scale: heroScale }}
-          className="absolute inset-0 bg-gradient-to-br from-blush-50 via-lavender-50 to-peach-50"
+          className="absolute inset-0 bg-gradient-to-br from-rose-soft via-pink-soft to-purple-100"
         >
-          <div className="absolute inset-0 opacity-40">
-            <div className="absolute top-1/4 left-1/4 w-64 sm:w-96 h-64 sm:h-96 rounded-full bg-rose-300/30 blur-3xl" />
-            <div className="absolute bottom-1/4 right-1/4 w-56 sm:w-80 h-56 sm:h-80 rounded-full bg-pink-300/30 blur-3xl" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] rounded-full bg-purple-200/20 blur-3xl" />
+          <div className="absolute inset-0 opacity-30">
+            <div className="absolute top-1/4 left-1/4 w-64 sm:w-96 h-64 sm:h-96 rounded-full bg-rose/20 blur-3xl" />
+            <div className="absolute bottom-1/4 right-1/4 w-56 sm:w-80 h-56 sm:h-80 rounded-full bg-pink/20 blur-3xl" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] rounded-full bg-purple-300/10 blur-3xl" />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-white/30 to-blush-100/50" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-surface-primary/50" />
         </motion.div>
 
         <motion.div
@@ -73,19 +73,19 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-charcoal leading-[0.95] mb-4 sm:mb-6"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl hero-heading-text leading-[0.95] mb-4 sm:mb-6"
               style={{ fontFamily: "var(--font-display)", fontWeight: 300 }}
             >
               Beautiful Paintings
               <br />
-              <span className="italic text-rose-dark">Made with Love</span>
+              <span className="italic text-rose">Made with Love</span>
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="text-charcoal/70 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-4 sm:px-0"
+              className="text-secondary text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-4 sm:px-0"
             >
               Discover unique hand-painted artworks filled with emotion, beauty, and 
               tender creativity — each one a labor of love.
@@ -102,7 +102,7 @@ export default function Home() {
               </Link>
               <Link
                 href="/gallery?available=true"
-                className="btn-sweet-outline border-rose/30 text-charcoal hover:bg-rose hover:text-white w-full sm:w-auto sm:min-w-[200px]"
+                className="btn-sweet-outline w-full sm:w-auto sm:min-w-[200px]"
               >
                 Shop Now
               </Link>
@@ -116,7 +116,7 @@ export default function Home() {
           transition={{ delay: 1.5 }}
           className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
-          <span className="text-ivory/40 text-[0.55rem] sm:text-[0.6rem] tracking-[0.2em] uppercase">
+          <span className="text-muted text-[0.55rem] sm:text-[0.6rem] tracking-[0.2em] uppercase">
             Scroll to explore
           </span>
           <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
@@ -245,11 +245,8 @@ export default function Home() {
             <SectionHeading
               label="The Collection"
               title="Artworks Coming Soon"
-              description="The gallery is being curated. Check back soon or visit the admin panel to add artworks."
+              description="The gallery is being curated. Check back soon as new artworks arrive."
             />
-            <Link href="/admin" className="btn-outline mt-4">
-              Go to Admin Panel
-            </Link>
           </div>
         </section>
       )}
@@ -257,7 +254,7 @@ export default function Home() {
       {/* =============================================
           ARTIST HIGHLIGHT
           ============================================= */}
-      <section className="py-16 sm:py-20 lg:py-28 gradient-sweet-girl text-charcoal">
+      <section className="py-16 sm:py-20 lg:py-28 gradient-sweet-girl">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
             <motion.div
@@ -267,21 +264,21 @@ export default function Home() {
               transition={{ duration: 0.8 }}
               className="order-2 lg:order-1"
             >
-              <span className="text-xs tracking-[0.2em] uppercase text-rose-dark mb-4 block">
+              <span className="text-xs tracking-[0.2em] uppercase text-rose mb-4 block">
                 The Artist
               </span>
               <h2
-                className="text-3xl sm:text-4xl lg:text-5xl text-charcoal mb-4 sm:mb-6"
+                className="text-3xl sm:text-4xl lg:text-5xl text-primary mb-4 sm:mb-6"
                 style={{ fontFamily: "var(--font-display)" }}
               >
-                {settings?.artistFullName || "Diksha Kapoor"}
+                {settings?.artistFullName || "Diksha Patel"}
               </h2>
-              <p className="text-charcoal/60 text-sm leading-relaxed mb-6">
+              <p className="text-secondary text-sm leading-relaxed mb-6">
                 {settings?.bio?.substring(0, 300) || "A talented young artist who paints with her heart..."}...
               </p>
-              <blockquote className="border-l-2 border-rose-dark/60 pl-4 sm:pl-6 mb-6 sm:mb-8">
+              <blockquote className="border-l-2 border-rose/60 pl-4 sm:pl-6 mb-6 sm:mb-8">
                 <p
-                  className="text-charcoal/50 text-sm italic leading-relaxed"
+                  className="text-muted text-sm italic leading-relaxed"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   &ldquo;I paint with love, and every brushstroke comes from my heart.&rdquo;
@@ -299,10 +296,10 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="order-1 lg:order-2"
             >
-              <div className="aspect-[4/5] bg-gradient-to-br from-rose-50 to-pink-50 relative overflow-hidden rounded-lg">
+              <div className="aspect-[4/5] bg-gradient-to-br from-rose-soft to-pink-soft surface-card relative overflow-hidden rounded-lg">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
-                    <div className="w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-4 rounded-full bg-gradient-to-br from-rose-200 to-pink-300 flex items-center justify-center">
+                    <div className="w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-4 rounded-full bg-gradient-to-br from-rose to-rose-dark flex items-center justify-center">
                       <span className="text-4xl sm:text-5xl text-white" style={{ fontFamily: "var(--font-display)" }}>
                         D
                       </span>

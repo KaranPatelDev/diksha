@@ -1,26 +1,57 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, MessageCircle, Send, Instagram } from "lucide-react";
+import { Mail, Phone, MapPin, MessageCircle, Send, Instagram, ExternalLink } from "lucide-react";
 import { getSettings } from "@/lib/data";
 import { useState, useEffect } from "react";
 import { SiteSettings } from "@/lib/types";
 import SectionHeading from "@/components/SectionHeading";
 
+// Formspree form endpoint - replace with your own after signing up at formspree.io
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xpwzgvrz";
+
 export default function ContactPage() {
   const [settings, setSettings] = useState<SiteSettings | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
 
   useEffect(() => {
     setSettings(getSettings());
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setForm({ name: "", email: "", subject: "", message: "" });
-    setTimeout(() => setSubmitted(false), 5000);
+    setLoading(true);
+    
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          subject: form.subject,
+          message: form.message,
+        }),
+      });
+      
+      if (response.ok) {
+        setSubmitted(true);
+        setForm({ name: "", email: "", subject: "", message: "" });
+        setTimeout(() => setSubmitted(false), 5000);
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Fallback to WhatsApp ifFormspree fails
+  const sendViaWhatsApp = () => {
+    const text = `Hi! I'm ${form.name}%0AEmail: ${form.email}%0ASubject: ${form.subject || 'General Inquiry'}%0AMessage: ${form.message}`;
+    window.open(`https://wa.me/919016278391?text=${text}`, "_blank");
   };
 
   return (
@@ -54,15 +85,13 @@ export default function ContactPage() {
                     </div>
                   </a>
 
-                  {settings.whatsapp && (
-                    <a href={settings.whatsapp} target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 sm:gap-4 p-4 sm:p-5 surface-card border border-subtle rounded hover:border-gold/30 transition-colors group">
-                      <MessageCircle size={18} className="text-gold mt-0.5" />
-                      <div>
-                        <p className="text-xs text-muted uppercase tracking-wider mb-1">WhatsApp</p>
-                        <p className="text-sm text-primary group-hover:text-gold transition-colors">Message on WhatsApp</p>
-                      </div>
-                    </a>
-                  )}
+                  <a href="https://wa.me/919016278391" target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 sm:gap-4 p-4 sm:p-5 surface-card border border-subtle rounded hover:border-rose/30 transition-colors group">
+                    <MessageCircle size={18} className="text-rose mt-0.5" />
+                    <div>
+                      <p className="text-xs text-muted uppercase tracking-wider mb-1">WhatsApp</p>
+                      <p className="text-sm text-primary group-hover:text-rose transition-colors">Message on WhatsApp</p>
+                    </div>
+                  </a>
 
                   {settings.instagram && (
                     <a href={settings.instagram} target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 sm:gap-4 p-4 sm:p-5 surface-card border border-subtle rounded hover:border-gold/30 transition-colors group">
@@ -135,9 +164,18 @@ export default function ContactPage() {
                   <textarea required value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Your message..." className="input-field" rows={5} />
                 </div>
 
-                <button type="submit" className="btn-primary w-full">
-                  <span className="flex items-center justify-center gap-2"><Send size={14} /> Send Message</span>
-                </button>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <button type="submit" disabled={loading} className="btn-sweet-primary flex-1">
+                    <span className="flex items-center justify-center gap-2">
+                      <Send size={14} /> {loading ? "Sending..." : "Send Message"}
+                    </span>
+                  </button>
+                  <button type="button" onClick={sendViaWhatsApp} className="btn-sweet-outline flex-1">
+                    <span className="flex items-center justify-center gap-2">
+                      <MessageCircle size={14} /> WhatsApp
+                    </span>
+                  </button>
+                </div>
               </form>
             )}
           </motion.div>
