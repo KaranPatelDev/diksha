@@ -1,26 +1,594 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ============================================
+   DIKSHA ART STUDIO — Design System
+   Premium gallery aesthetic · Dark/Light modes
+   ============================================ */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* --- Light Palette — Soft & Sweet Girl Aesthetic --- */
+  --color-ivory: #FEFCFA;
+  --color-cream: #F9F5F2;
+  --color-sand: #EDE5E0;
+  --color-taupe: #C9B8AC;
+  --color-warm-gray: #9A8A80;
+  --color-charcoal: #4A4340;
+  --color-espresso: #2A2522;
+  --color-midnight: #1A1714;
+
+  /* — Sweet Pastel Pink Theme — */
+  --color-rose-soft: #FFCDD2;
+  --color-rose-light: #F8B4C4;
+  --color-rose: #EC8AA0;
+  --color-rose-dark: #D47588;
+  
+  --color-pink-soft: #FCE4EC;
+  --color-pink-light: #F8BBD9;
+  --color-pink: #F06292;
+  --color-pink-dark: #E91E63;
+
+  --color-blush-50: #FFF5F7;
+  --color-blush-100: #FEEBED;
+  --color-lavender-50: #F5F3FF;
+  --color-peach-50: #FFF7F3;
+
+  --color-gold: #C8A96E;
+  --color-gold-light: #D4BC8A;
+  --color-gold-dark: #A88B52;
+
+  --color-terracotta: #C17852;
+  --color-sage: #8B9E82;
+  --color-deep-blue: #3A4F6E;
+
+  --color-success: #5A8A5E;
+  --color-error: #C74E4E;
+  --color-warning: #D4A054;
+
+  /* --- Dark Mode Colors --- */
+  --color-d-bg: #0F0D0B;
+  --color-d-surface: #1A1714;
+  --color-d-surface2: #242019;
+  --color-d-border: #33302A;
+  --color-d-text: #E8E0D8;
+  --color-d-text-muted: #9A8E82;
+
+  /* --- Typography --- */
+  --font-display: 'Cormorant Garamond', 'Georgia', serif;
+  --font-body: 'Inter', 'Helvetica Neue', sans-serif;
+
+  /* --- Animations --- */
+  --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+
+  /* --- Shadows --- */
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.06);
+  --shadow-elevated: 0 12px 48px rgba(0, 0, 0, 0.1);
+  --shadow-image: 0 8px 32px rgba(0, 0, 0, 0.12);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ==========================================
+   Base
+   ========================================== */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-ivory);
+  color: var(--color-charcoal);
+  font-family: var(--font-body);
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* ==========================================
+   Dark Mode
+   ========================================== */
+
+html.dark body {
+  background-color: var(--color-d-bg);
+  color: var(--color-d-text);
+}
+
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark h4,
+html.dark h5,
+html.dark h6 {
+  color: var(--color-d-text);
+}
+
+::selection {
+  background-color: var(--color-gold);
+  color: var(--color-midnight);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--color-midnight);
+  letter-spacing: -0.02em;
+}
+
+/* ==========================================
+   Scrollbar
+   ========================================== */
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--color-cream); }
+::-webkit-scrollbar-thumb { background: var(--color-taupe); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-warm-gray); }
+html.dark ::-webkit-scrollbar-track { background: var(--color-d-surface); }
+html.dark ::-webkit-scrollbar-thumb { background: var(--color-d-border); }
+
+/* ==========================================
+   Gradients & Glass
+   ========================================== */
+
+.gradient-gold {
+  background: linear-gradient(135deg, var(--color-gold-dark), var(--color-gold), var(--color-gold-light));
+}
+
+.gradient-sweet-girl {
+  background: linear-gradient(180deg, #FFF5F7 0%, #FCE4EC 50%, #FDF2F5 100%);
+}
+
+.gradient-dark {
+  background: linear-gradient(180deg, var(--color-midnight) 0%, var(--color-espresso) 100%);
+}
+
+.glass-effect {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background-color: rgba(250, 248, 245, 0.82);
+}
+
+html.dark .glass-effect {
+  background-color: rgba(15, 13, 11, 0.85);
+}
+
+/* ==========================================
+   Divider
+   ========================================== */
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-sand) 20%, var(--color-taupe) 50%, var(--color-sand) 80%, transparent);
+}
+
+html.dark .divider {
+  background: linear-gradient(90deg, transparent, var(--color-d-border) 20%, var(--color-d-text-muted) 50%, var(--color-d-border) 80%, transparent);
+}
+
+/* ==========================================
+   Artwork Cards
+   ========================================== */
+
+.artwork-card {
+  overflow: hidden;
+  position: relative;
+}
+
+.artwork-card img {
+  transition: transform 0.7s var(--ease-out-expo);
+}
+
+.artwork-card:hover img {
+  transform: scale(1.05);
+}
+
+.artwork-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(26, 23, 20, 0.6) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-smooth);
+}
+
+.artwork-card:hover .artwork-overlay {
+  opacity: 1;
+}
+
+/* ==========================================
+   Buttons
+   ========================================== */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background-color: var(--color-midnight);
+  color: var(--color-ivory);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+html.dark .btn-primary {
+  background-color: var(--color-gold);
+  color: var(--color-midnight);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-out-expo);
+  z-index: 0;
+}
+
+.btn-primary:hover::before {
+  transform: scaleX(1);
+}
+
+html.dark .btn-primary::before {
+  background-color: var(--color-gold-dark);
+}
+
+.btn-primary span {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-primary:hover {
+  color: var(--color-midnight);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background-color: transparent;
+  color: var(--color-midnight);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid var(--color-charcoal);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-smooth);
+}
+
+html.dark .btn-outline {
+  color: var(--color-d-text);
+  border-color: var(--color-d-border);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-midnight);
+  color: var(--color-ivory);
+  border-color: var(--color-midnight);
+}
+
+html.dark .btn-outline:hover {
+  background-color: var(--color-gold);
+  color: var(--color-midnight);
+  border-color: var(--color-gold);
+}
+
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background-color: var(--color-gold);
+  color: var(--color-midnight);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-smooth);
+}
+
+.btn-gold:hover {
+  background-color: var(--color-gold-dark);
+}
+
+/* ==========================================
+   Skeleton Loader
+   ========================================== */
+
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--color-cream) 0%, var(--color-sand) 40%, var(--color-cream) 60%, var(--color-cream) 100%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+}
+
+html.dark .skeleton {
+  background: linear-gradient(90deg, var(--color-d-surface) 0%, var(--color-d-surface2) 40%, var(--color-d-surface) 60%);
+  background-size: 200px 100%;
+}
+
+/* ==========================================
+   Badges
+   ========================================== */
+
+.badge-available {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  background-color: rgba(90, 138, 94, 0.1);
+  color: var(--color-success);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+
+.badge-sold {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  background-color: rgba(199, 78, 78, 0.1);
+  color: var(--color-error);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+
+.badge-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  background-color: rgba(200, 169, 110, 0.15);
+  color: var(--color-gold-dark);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+
+/* ==========================================
+   Inputs
+   ========================================== */
+
+.input-field {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  background-color: transparent;
+  border: 1px solid var(--color-sand);
+  color: var(--color-charcoal);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  transition: all 0.3s;
+  outline: none;
+}
+
+html.dark .input-field {
+  border-color: var(--color-d-border);
+  color: var(--color-d-text);
+  background-color: var(--color-d-surface);
+}
+
+.input-field:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 3px rgba(200, 169, 110, 0.1);
+}
+
+.input-field::placeholder {
+  color: var(--color-taupe);
+}
+
+html.dark .input-field::placeholder {
+  color: var(--color-d-text-muted);
+}
+
+textarea.input-field {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* ==========================================
+   Sweet Button Styles
+   ========================================== */
+
+.btn-sweet-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: linear-gradient(135deg, #F8BBD9 0%, #EC8AA0 100%);
+  color: white;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-smooth);
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.btn-sweet-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #EC8AA0 0%, #D47588 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-out-expo);
+  z-index: 0;
+}
+
+.btn-sweet-primary:hover::before {
+  transform: scaleX(1);
+}
+
+.btn-sweet-primary span {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-sweet-primary:hover {
+  box-shadow: 0 4px 15px rgba(232, 138, 160, 0.4);
+}
+
+.btn-sweet-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background-color: transparent;
+  color: var(--color-charcoal);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid var(--color-rose);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-smooth);
+  border-radius: 4px;
+}
+
+.btn-sweet-outline:hover {
+  background-color: var(--color-rose);
+  color: white;
+  border-color: var(--color-rose);
+}
+
+.badge-sweet {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  background: linear-gradient(135deg, #F8BBD9 0%, #EC8AA0 100%);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 20px;
+}
+
+.surface-primary {
+  background-color: var(--color-ivory);
+}
+html.dark .surface-primary {
+  background-color: var(--color-d-bg);
+}
+
+.surface-secondary {
+  background-color: var(--color-cream);
+}
+html.dark .surface-secondary {
+  background-color: var(--color-d-surface);
+}
+
+.surface-card {
+  background-color: rgba(245, 240, 235, 0.5);
+}
+html.dark .surface-card {
+  background-color: var(--color-d-surface2);
+}
+
+.text-primary {
+  color: var(--color-midnight);
+}
+html.dark .text-primary {
+  color: var(--color-d-text);
+}
+
+.text-secondary {
+  color: var(--color-charcoal);
+}
+html.dark .text-secondary {
+  color: var(--color-d-text-muted);
+}
+
+.text-muted {
+  color: var(--color-warm-gray);
+}
+html.dark .text-muted {
+  color: var(--color-d-text-muted);
+}
+
+.border-subtle {
+  border-color: var(--color-sand);
+}
+html.dark .border-subtle {
+  border-color: var(--color-d-border);
+}
+
+/* ==========================================
+   Admin-specific
+   ========================================== */
+
+.admin-sidebar {
+  background: linear-gradient(180deg, #1A1714 0%, #2A2522 100%);
+  color: var(--color-ivory);
+}
+
+.admin-content {
+  background: var(--color-cream);
+}
+
+html.dark .admin-content {
+  background: #0F0D0B;
+}
+
+/* Sweet Admin Colors */
+.admin-sidebar.sweet-admin {
+  background: linear-gradient(180deg, #4A4340 0%, #2A2522 100%);
+}
+
+.admin-sidebar.sweet-admin .sidebar-pink {
+  background: linear-gradient(180deg, #EC8AA0 0%, #D47588 100%);
+}
+
+/* ==========================================
+   Animations
+   ========================================== */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s var(--ease-out-expo) forwards;
 }
