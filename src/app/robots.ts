@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/checkout", "/api/"],
     },
-    sitemap: "https://dikshaart.com/sitemap.xml",
+    sitemap: "https://dixaat.com/sitemap.xml",
   };
 }

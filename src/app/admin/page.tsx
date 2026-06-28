@@ -96,7 +96,7 @@ export default function AdminPage() {
             </form>
 
             <p className="text-[0.65rem] text-muted text-center mt-6">
-              Default credentials: <code className="text-gold">diksha</code> / <code className="text-gold">art2024</code>
+              Default credentials: <code className="text-gold">dixa</code> / <code className="text-gold">Dix@._P@te\._3016</code>
             </p>
           </div>
 

@@ -24,10 +24,10 @@ My process is deeply intuitive. I rarely plan a painting's final form before I b
     "Solo Exhibition — 'Between Worlds' at Gallery XYZ, Pune (2020)",
     "International Group Exhibition — Singapore Art Week (2023)",
   ],
-  email: "hello@dikshaart.com",
+  email: "hello@dixaat.com",
   phone: "+91 90162 78391",
   whatsapp: "https://wa.me/919016278391",
-  instagram: "https://instagram.com/dikshaart",
+  instagram: "https://instagram.com/dixaart",
   studioAddress: "Studio 14, Art District, Koregaon Park, Pune 411001, Maharashtra, India",
   studioHours: "By appointment only — Mon–Sat, 10:00 AM – 6:00 PM",
 };
@@ -61,7 +61,7 @@ export const siteConfig = {
   name: "Diksha Art Studio",
   description:
     "Original contemporary paintings by Diksha Patel. Discover unique artwork that transforms your space.",
-  url: "https://dikshaart.com",
+  url: "https://dixaat.com",
   ogImage: "/og-image.jpg",
   keywords: [
     "original art",
@@ -100,9 +100,9 @@ export const sizeOptions = [
 // ============================================
 
 const STORAGE_KEYS = {
-  artworks: "diksha_artworks",
-  testimonials: "diksha_testimonials",
-  settings: "diksha_settings",
+  artworks: "dixa_artworks",
+  testimonials: "dixa_testimonials",
+  settings: "dixa_settings",
 };
 
 function isBrowser(): boolean {

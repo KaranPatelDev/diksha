@@ -36,8 +36,8 @@ export default function Navbar() {
 
   const handleAdminLogin = () => {
     setAdminError("");
-    if (adminUser === "diksha" && adminPass === "di_pa_ks_te_ha_l@123") {
-      localStorage.setItem("diksha_admin", "true");
+    if (adminUser === "dixa" && adminPass === "Dix@._P@te\\._3016") {
+      localStorage.setItem("dixa_admin", "true");
       setShowAdminLogin(false);
       router.push("/admin");
     } else {
@@ -56,7 +56,7 @@ export default function Navbar() {
                 className="text-lg sm:text-xl tracking-[0.15em] uppercase font-medium"
                 style={{ fontFamily: "var(--font-display)" }}
               >
-                Diksha
+                Dixa
               </span>
               <span className="text-[0.55rem] sm:text-[0.6rem] tracking-[0.25em] uppercase -mt-1 opacity-60">
                 Art Studio

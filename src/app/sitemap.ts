@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { getArtworks } from "@/lib/data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://dikshaart.com";
+  const baseUrl = "https://dixaat.com";
   const artworks = getArtworks();
 
   const artworkUrls = artworks.map((artwork) => ({

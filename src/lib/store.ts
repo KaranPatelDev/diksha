@@ -4,8 +4,8 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { Artwork, CartItem, WishlistItem } from "./types";
 
-const ADMIN_USERNAME = "diksha";
-const ADMIN_PASSWORD = "di_pa_ks_te_ha_l@123";
+const ADMIN_USERNAME = "dixa";
+const ADMIN_PASSWORD = "Dix@._P@te\\._3016";
 
 interface StoreState {
   // Cart
@@ -97,7 +97,7 @@ export const useStore = create<StoreState>()(
       adminLogout: () => set({ isAdmin: false }),
     }),
     {
-      name: "diksha-store",
+      name: "dixa-store",
       partialize: (state) => ({
         cart: state.cart,
         wishlist: state.wishlist,
